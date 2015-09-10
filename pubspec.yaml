@@ -1,0 +1,8 @@
+name: suiml
+version: 0.0.1
+dependencies:
+  barback: any
+  browser: any
+  html: any
+transformers:
+- suiml/suiml_transformer
