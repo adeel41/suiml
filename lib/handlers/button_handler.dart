@@ -5,15 +5,25 @@ class ButtonHandler extends Handler {
   void handle(Document document) {
 
     _addClassesForEach(document, "button", ["ui", "button"]);
+    _replaceExistingButtonWith(document, "button-primary", ["ui", "primary", "button"]);
+    _replaceExistingButtonWith(document, "button-secondary", ["ui", "secondary", "button"]);
+  }
 
-    for (var btn in document.querySelectorAll("button-primary")) {
-      var updatedButton = new Element.tag("button");
-      updatedButton.attributes.addAll(btn.attributes);
-      updatedButton.classes.addAll(["ui", "primary", "button"]);
-      updatedButton.innerHtml = btn.innerHtml;
-
+  void _replaceExistingButtonWith(Document document, String selector, List<String> classes) {
+    _doForEach(document, selector, (btn) {
+      var updatedButton = _copyFrom(btn, "button");
+      updatedButton.classes.addAll(classes);
       btn.replaceWith(updatedButton);
-    }
+    });
+  }
+
+
+  Element _copyFrom(Element element, String newElementTag) {
+    var newElement = new Element.tag(newElementTag);
+    newElement.attributes.addAll(element.attributes);
+    newElement.innerHtml = element.innerHtml;
+
+    return newElement;
   }
 
   void _doForEach(Document document, String selector, void action(Element element)) {
@@ -23,6 +33,4 @@ class ButtonHandler extends Handler {
   }
 
   void _addClassesForEach(Document document, String selector, List<String> classes) => _doForEach(document, selector, (e) => e.classes.addAll(classes));
-
-
 }
