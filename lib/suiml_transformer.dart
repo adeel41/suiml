@@ -16,6 +16,7 @@ class SuimlTransformer extends Transformer {
 
     var document = new Document.html(content);
     new ButtonHandler().handle(document);
+    new IconsHandler().handle(document);
     new CommonAttributesHandler().handle(document);
 
     var newContent = document.outerHtml;
