@@ -37,6 +37,9 @@ class ButtonHandler extends Handler {
           classes.addAll(["vertical", "animated"]);
         else if (animationType.toLowerCase() == "fade")
           classes.addAll(["animated", "fade"]);
+
+        //remove animation as it was only for the transformer.
+        element.attributes.remove("animation");
       }
       else
         classes.add("animated");
@@ -53,8 +56,6 @@ class ButtonHandler extends Handler {
         ..addClasses(["hidden", "content"])
         ..setInnerHtmlFrom(childElement)), element, "hidden")
         ..replaceWith(element);
-
-
     });
   }
 
